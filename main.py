@@ -46,6 +46,10 @@ def main():
                     asteroid.split()
                     shot.kill()
 
+        for shot in shots:
+            if not screen.get_rect().colliderect(shot.rect):
+                shot.kill()
+
         screen.fill("black")
 
         for obj in drawable:
