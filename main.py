@@ -55,26 +55,25 @@ def main():
                 if asteroid.collides_with(player):
                     print("Game Over!")
                     raise SystemExit
+                
+            for shot in shots:
+                shot.update(dt)
         
             for asteroid in asteroids:
                 for shot in shots:
                     if asteroid.collides_with(shot):
                         if asteroid.radius > 40:
-                            score += 20
-                        elif asteroid.radius > 30:
                             score += 10
+                        elif asteroid.radius > 30:
+                            score += 50
                         else:
-                            score += 5
+                            score += 100
 
                         asteroid.split()
                         shot.kill()
 
             if score > high_score:
                 high_score = score
-
-            for shot in shots:
-                if not screen.get_rect().colliderect(shot.rect):
-                    shot.kill()
 
             screen.fill("black")
 
