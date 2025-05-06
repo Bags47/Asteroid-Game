@@ -50,14 +50,12 @@ def main():
                     raise SystemExit
             
             updatable.update(dt)
+            player.wrap(SCREEN_WIDTH, SCREEN_HEIGHT)
 
             for asteroid in asteroids:
                 if asteroid.collides_with(player):
                     print("Game Over!")
                     raise SystemExit
-                
-            for shot in shots:
-                shot.update(dt)
         
             for asteroid in asteroids:
                 for shot in shots:

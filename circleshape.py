@@ -1,5 +1,5 @@
 import pygame
-
+from constants import *
 class CircleShape(pygame.sprite.Sprite):
     def __init__(self, x, y, radius):
         if hasattr(self, "containers"):
@@ -28,3 +28,14 @@ class CircleShape(pygame.sprite.Sprite):
 
     def collides_with(self, other):
         return self.position.distance_to(other.position) <= self.radius + other.radius
+    
+    def wrap(self, SCREEN_WIDTH, SCREEN_HEIGHT):
+        if self.position.x < 0:
+            self.position.x = SCREEN_WIDTH
+        elif self.position.x > SCREEN_WIDTH:
+            self.position.x = 0
+
+        if self.position.y < 0:
+            self.position.y = SCREEN_HEIGHT
+        elif self.position.y > SCREEN_HEIGHT:
+            self.position.y = 0
