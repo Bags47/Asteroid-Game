@@ -8,6 +8,8 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shoot_timer = 0
+        self.shield_active = False
+        self.shield_used = False
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -19,6 +21,9 @@ class Player(CircleShape):
     
     def draw(self, screen):
         pygame.draw.polygon(screen, "white", self.triangle(), 2)
+
+        if self.shield_active:
+            pygame.draw.polygon(screen, "blue", self.triangle(), 2)
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -48,3 +53,14 @@ class Player(CircleShape):
         self.shoot_timer = PLAYER_SHOOT_COOLDOWN
         shot = Shot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+
+    def activate_one_time_shield(self):
+        if not self.shield_used:
+            self.shield_active = True
+    
+    def shield_collision(self):
+        if self.shield_active:
+            self.shield_active = False
+            self.shield_used = True
+        else:
+            self.collides_with()

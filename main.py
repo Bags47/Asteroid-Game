@@ -54,8 +54,17 @@ def main():
 
             for asteroid in asteroids:
                 if asteroid.collides_with(player):
+                    player.shield_collision()
+                    print("Shield absorbed the hit!")
+                    asteroids.remove(asteroid)
+                else:
                     print("Game Over!")
                     raise SystemExit
+                
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_p:
+                        player.activate_one_time_shield()
         
             for asteroid in asteroids:
                 for shot in shots:
