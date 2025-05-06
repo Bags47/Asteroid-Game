@@ -48,24 +48,23 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     raise SystemExit
-            
-            updatable.update(dt)
-            player.wrap(SCREEN_WIDTH, SCREEN_HEIGHT)
-
-            for asteroid in asteroids:
-                if asteroid.collides_with(player):
-                    player.shield_collision()
-                    print("Shield absorbed the hit!")
-                    asteroids.remove(asteroid)
-                else:
-                    print("Game Over!")
-                    raise SystemExit
-                
-            for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:
                         player.activate_one_time_shield()
-        
+            
+            updatable.update(dt)
+            player.wrap(SCREEN_WIDTH, SCREEN_HEIGHT)            
+                        
+            for asteroid in asteroids:
+                if asteroid.collides_with(player):
+                    if player.shield_active:
+                            player.shield_collision()
+                            print("Shield absorbed the hit!")
+                            asteroids.remove(asteroid)
+                    else:
+                        print("Game Over!")
+                        raise SystemExit
+             
             for asteroid in asteroids:
                 for shot in shots:
                     if asteroid.collides_with(shot):
