@@ -1,11 +1,11 @@
 import sys
 import pygame
+import pygame.font
 from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
-import pygame.font
 
 def load_high_score():
     try:
@@ -89,7 +89,7 @@ def main():
             score_text = font.render(f"Score: {score}", True, (255, 255, 255))
             high_score_text = font.render(f"High Score: {high_score}", True, (255, 255, 255))
             screen.blit(score_text, (10, 10))
-            screen.blit(high_score_text, (10, 50))
+            screen.blit(high_score_text, (10, 50))  
 
             pygame.display.flip()
             dt = clock.tick(60) / 1000

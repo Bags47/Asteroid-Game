@@ -2,6 +2,7 @@ import pygame
 from constants import *
 from circleshape import CircleShape
 from shot import Shot
+from sounds import *
 
 class Player(CircleShape):
     def __init__(self, x, y):
@@ -43,6 +44,7 @@ class Player(CircleShape):
         if keys[pygame.K_s]:
             self.move(-dt)
         if keys[pygame.K_SPACE]:
+            shooting_sound.play(loops=0)
             self.shoot()
     
     def shoot(self):
