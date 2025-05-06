@@ -9,3 +9,4 @@ Things Added:
 - Screen wrap for all objects.
 - A one time use shield.
 - A score and highscore.
+- Shot sounds.
